@@ -13,12 +13,14 @@ func uploadFile(w http.ResponseWriter, r *http.Request) {
 
 	fmt.Println("File Upload Endpoint Hit")
 	if r.ContentLength > MAX_SIZE {
+		fmt.Println("Rejected 1!")
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
 	l, err := strconv.ParseInt(r.Header.Get("Content-Length"), 10, 64)
 	if err != nil || l > MAX_SIZE {
+		fmt.Println("Rejected 2!")
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
